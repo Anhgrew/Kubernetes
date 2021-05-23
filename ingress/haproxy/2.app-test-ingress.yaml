@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+
+kind: Ingress
+metadata:
+  name: app
+  namespace: haproxy-controller
+spec:
+  defaultBackend:
+    service:
+      name: http-test-svc
+      port: 
+        number: 80
+  rules:
+    # Tên miền truy cập
+  - host: anhgrew.test
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+          # dịch vụ phục vụ tương ứng với tên miền và path
+            name: http-test-svc
+            port: 
+              number: 80

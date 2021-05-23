@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+
+kind: Ingress
+metadata:
+  name: app
+  namespace: nginx-ingress
+spec:
+  tls:
+    - hosts:
+      - anhgrew.test
+      secretName: default-server-secret
+  defaultBackend:
+    service:
+      name: http-test-svc
+      port: 
+        number: 80
+  rules:
+    # Tên miền truy cập
+  - host: anhgrew.test
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+          # dịch vụ phục vụ tương ứng với tên miền và path
+            name: http-test-svc
+            port: 
+              number: 80
